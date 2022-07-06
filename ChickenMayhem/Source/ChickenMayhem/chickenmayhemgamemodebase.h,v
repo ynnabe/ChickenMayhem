@@ -1,0 +1,38 @@
+head     1.1;
+access   ;
+symbols  ;
+locks    ;comment  @@;
+
+
+1.1
+date     2022.06.02.16.18.13;  author p4;  state Exp;
+branches ;
+next     ;
+
+
+desc
+@@
+
+
+1.1
+log
+@@
+text
+@// Copyright Epic Games, Inc. All Rights Reserved.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/GameModeBase.h"
+#include "ChickenMayhemGameModeBase.generated.h"
+
+/**
+ * 
+ */
+UCLASS()
+class CHICKENMAYHEM_API AChickenMayhemGameModeBase : public AGameModeBase
+{
+	GENERATED_BODY()
+	
+};
+@

@@ -1,0 +1,27 @@
+head     1.1;
+access   ;
+symbols  ;
+locks    ;comment  @@;
+
+
+1.1
+date     2022.06.02.16.18.13;  author p4;  state Exp;
+branches ;
+next     ;
+
+
+desc
+@@
+
+
+1.1
+log
+@@
+text
+@// Copyright Epic Games, Inc. All Rights Reserved.
+
+#include "ChickenMayhem.h"
+#include "Modules/ModuleManager.h"
+
+IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, ChickenMayhem, "ChickenMayhem" );
+@

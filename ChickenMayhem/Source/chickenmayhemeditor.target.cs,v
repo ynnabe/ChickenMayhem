@@ -1,0 +1,35 @@
+head     1.1;
+access   ;
+symbols  ;
+locks    ;comment  @@;
+
+
+1.1
+date     2022.06.02.16.18.13;  author p4;  state Exp;
+branches ;
+next     ;
+
+
+desc
+@@
+
+
+1.1
+log
+@@
+text
+@// Copyright Epic Games, Inc. All Rights Reserved.
+
+using UnrealBuildTool;
+using System.Collections.Generic;
+
+public class ChickenMayhemEditorTarget : TargetRules
+{
+	public ChickenMayhemEditorTarget( TargetInfo Target) : base(Target)
+	{
+		Type = TargetType.Editor;
+		DefaultBuildSettings = BuildSettingsVersion.V2;
+		ExtraModuleNames.AddRange( new string[] { "ChickenMayhem" } );
+	}
+}
+@
