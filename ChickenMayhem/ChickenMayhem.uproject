@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "5.0",
+	"EngineAssociation": "{7CCBF38E-408A-BE7E-49D0-999EB49FDAD0}",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -10,7 +10,8 @@
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
 				"Engine",
-				"UMG"
+				"UMG",
+				"AIModule"
 			]
 		}
 	],
@@ -31,5 +32,8 @@
 				"Linux"
 			]
 		}
+	],
+	"TargetPlatforms": [
+		"Windows"
 	]
 }

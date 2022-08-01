@@ -3,6 +3,8 @@
 
 #include "BasePlayerController.h"
 
+#include "Gamemodes/BaseGameMode.h"
+
 ABasePlayerController::ABasePlayerController()
 {
 	bShowMouseCursor = true;
@@ -12,7 +14,11 @@ void ABasePlayerController::SetPawn(APawn* InPawn)
 {
 	Super::SetPawn(InPawn);
 	CachedBaseCharacter = Cast<ABaseCharacter>(InPawn);
-	CreateAndInitializeWidgets();
+	ABaseGameMode* BaseGameMode = StaticCast<ABaseGameMode*>(GetWorld()->GetAuthGameMode());
+	if(IsValid(BaseGameMode))
+	{
+		BaseGameMode->OnGameEndDelegate.AddUObject(this, &ABasePlayerController::OnGameEnd);
+	}
 }
 
 void ABasePlayerController::SetupInputComponent()
@@ -22,6 +28,7 @@ void ABasePlayerController::SetupInputComponent()
 	InputComponent->BindAxis("TurnRight", this, &ABasePlayerController::TurnRight);
 	InputComponent->BindAction("Fire", IE_Pressed, this, &ABasePlayerController::Fire);
 	InputComponent->BindAction("Reload", IE_Pressed, this, &ABasePlayerController::Reload);
+	InputComponent->BindAction("Pause", IE_Pressed, this, &ABasePlayerController::PlayMenu);
 }
 
 float ABasePlayerController::CalculateEdgeScroll()
@@ -50,15 +57,19 @@ float ABasePlayerController::CalculateEdgeScroll()
 	return Value;
 }
 
-void ABasePlayerController::CreateAndInitializeWidgets()
+void ABasePlayerController::PlayMenu()
 {
-	if(!PlayerHUDWidget.IsValid())
+	if(!bIsPaused)
 	{
-		PlayerHUDWidget = CreateWidget<UPlayerHUDWidget>(GetWorld(), PlayerHUDWidgetClass);
-		if(PlayerHUDWidget.IsValid())
-		{
-			PlayerHUDWidget->AddToViewport();
-		}
+		bIsPaused = !bIsPaused;
+	}
+	else
+	{
+		bIsPaused = !bIsPaused;
+	}
+	if(CachedBaseCharacter.IsValid())
+	{
+		CachedBaseCharacter->PlayMenu(bIsPaused);
 	}
 }
 
@@ -81,4 +92,9 @@ void ABasePlayerController::Reload()
 	{
 		CachedBaseCharacter->Reload();
 	}
+}
+
+void ABasePlayerController::OnGameEnd()
+{
+	DisableInput(this);
 }

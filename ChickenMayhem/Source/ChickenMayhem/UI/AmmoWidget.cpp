@@ -13,6 +13,7 @@ void UAmmoWidget::NativeOnInitialized()
 	{
 		BaseCharacter->OnAmmoCountChangedDelegate.AddUObject(this, &UAmmoWidget::UpdateAmmo);
 		BaseCharacter->OnAvailableAmmoCountChangedDelegate.AddUObject(this, &UAmmoWidget::UpdateAvailableAmmo);
+		BaseCharacter->OnAvailableAmmoCountChangedUIDelegate.AddUObject(this, &UAmmoWidget::UpdateAvailableAmmoToAdd);
 	}
 }
 
@@ -24,4 +25,10 @@ void UAmmoWidget::UpdateAmmo(int32 NewAmmo)
 void UAmmoWidget::UpdateAvailableAmmo(int32 NewAvailableAmmo)
 {
 	AvailableAmmo = NewAvailableAmmo;
+}
+
+void UAmmoWidget::UpdateAvailableAmmoToAdd(int32 NewAvailableAmmoToAdd)
+{
+	AvailableAmmoToAdd = NewAvailableAmmoToAdd;
+	OnAvailableAmmoChanged();
 }

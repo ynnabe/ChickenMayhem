@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/TextBlock.h"
 #include "AmmoWidget.generated.h"
 
 /**
@@ -17,6 +18,9 @@ class CHICKENMAYHEM_API UAmmoWidget : public UUserWidget
 public:
 	virtual void NativeOnInitialized() override;
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnAvailableAmmoChanged();
+
 protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Properties")
@@ -24,6 +28,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Properties")
 	int32 AvailableAmmo;
+
+	UPROPERTY(BlueprintReadOnly)
+	int32 AvailableAmmoToAdd;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Properties")
 	UTexture* AmmoIcon;
@@ -33,5 +40,7 @@ private:
 	void UpdateAmmo(int32 NewAmmo);
 
 	void UpdateAvailableAmmo(int32 NewAvailableAmmo);
+
+	void UpdateAvailableAmmoToAdd(int32 NewAvailableAmmoToAdd);
 	
 };

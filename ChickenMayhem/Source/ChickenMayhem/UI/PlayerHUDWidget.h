@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AmmoWidget.h"
 #include "Blueprint/UserWidget.h"
 #include "PlayerHUDWidget.generated.h"
 
@@ -15,10 +14,13 @@ class CHICKENMAYHEM_API UPlayerHUDWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
+public:
 
+	virtual void NativeOnInitialized() override;
+	
 protected:
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Widgets name")
-	FName AmmoWidget;
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void OnStartSlowDown(bool State);
 	
 };

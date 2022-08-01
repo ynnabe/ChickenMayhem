@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "ChickenMayhem/Characters/BaseCharacter.h"
-#include "ChickenMayhem/UI/AmmoWidget.h"
 #include "ChickenMayhem/UI/PlayerHUDWidget.h"
 #include "GameFramework/PlayerController.h"
 #include "BasePlayerController.generated.h"
@@ -28,6 +27,8 @@ protected:
 
 	float CalculateEdgeScroll();
 
+	void PlayMenu();
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Widgets")
 	TSubclassOf<UPlayerHUDWidget> PlayerHUDWidgetClass;
 
@@ -35,13 +36,15 @@ private:
 
 	TWeakObjectPtr<UPlayerHUDWidget> PlayerHUDWidget;
 
-	void CreateAndInitializeWidgets();
-
 	void TurnRight(float Value);
 
 	void Fire();
 
 	void Reload();
 
+	void OnGameEnd();
+
 	TWeakObjectPtr<ABaseCharacter> CachedBaseCharacter;
+
+	bool bIsPaused = false;
 };
